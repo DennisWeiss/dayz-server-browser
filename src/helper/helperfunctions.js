@@ -22,4 +22,9 @@ const debounce = (f, interval, immediate) => {
   }
 }
 
-export {debounce}
+const ensureDigits = (number, digits) => number.toString().length >= digits ?
+    number.toString() :
+    [...Array(digits - number.toString().length)].map(_ => '0').join('') + number.toString()
+
+
+export {debounce, ensureDigits}

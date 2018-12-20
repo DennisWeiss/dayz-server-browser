@@ -6,6 +6,7 @@ import ThreeStateCheckbox from '../../common/ThreeStateCheckbox'
 import {FormattedMessage} from 'react-intl'
 import {Input} from 'semantic-ui-react'
 import {debounce} from '../../helper/helperfunctions'
+import DayTimeFilter from './DayTimeFilter'
 
 
 class ServerBrowserFilter extends React.Component {
@@ -18,11 +19,15 @@ class ServerBrowserFilter extends React.Component {
         <div className='filter-content'>
           <Input placeholder='Search by name' onChange={debounce(this.props.onSearchByNameChange, 500, false)}/>
           <br/>
+          <br/>
           <Input placeholder='Search by IP' onChange={debounce(this.props.onIpChange, 500, false)}/>
+          <br/>
+          <br/>
+          <ThreeStateCheckbox title={<FormattedMessage id='FULL_SERVER'/>} onClick={this.props.onChangeFullServerFilter}/>
           <br/>
           <ThreeStateCheckbox title={<FormattedMessage id='DAY'/>} onClick={this.props.onChangeDayFilter}/>
           <br/>
-          <ThreeStateCheckbox title={<FormattedMessage id='FULL_SERVER'/>} onClick={this.props.onChangeFullServerFilter}/>
+          <DayTimeFilter/>
         </div>
       </div>
     )

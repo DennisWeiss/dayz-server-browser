@@ -49,3 +49,7 @@ code {
 .ui.tabular.menu .item:hover {
     color: #ffffff;
 }
+
+.ant-slider-mark-text {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
