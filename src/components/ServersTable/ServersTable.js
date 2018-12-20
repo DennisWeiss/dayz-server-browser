@@ -23,55 +23,57 @@ const getDayTimeIcon = dayTime => {
 class ServersTable extends React.Component {
   render() {
     return (
-      <Table celled>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>
-              <FormattedMessage id='SERVER_NAME'/>
-            </Table.HeaderCell>
-            <Table.HeaderCell>
-              <FormattedMessage id='CURRENT_PLAYERS'/>
-            </Table.HeaderCell>
-            <Table.HeaderCell>
-              <FormattedMessage id='MAX_PLAYERS'/>
-            </Table.HeaderCell>
-            <Table.HeaderCell>
-              <FormattedMessage id='DAY_TIME'/>
-            </Table.HeaderCell>
-            <Table.HeaderCell>
-              <FormattedMessage id='IP_ADDRESS'/>
-            </Table.HeaderCell>
-            <Table.HeaderCell>
-              <FormattedMessage id='VERSION'/>
-            </Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {this.props.servers.map(server => (
+      <div className='server-browser-table-component'>
+        <Table celled>
+          <Table.Header>
             <Table.Row>
-              <Table.Cell >
-                {server.name}
-              </Table.Cell>
-              <Table.Cell >
-                {server.currentPlayers}
-              </Table.Cell>
-              <Table.Cell >
-                {server.maxPlayers}
-              </Table.Cell>
-              <Table.Cell >
-                <FontAwesomeIcon icon={getDayTimeIcon(server.dayTime)}/>
-                <span className='server-day-time'>{server.dayTime}</span>
-              </Table.Cell>
-              <Table.Cell >
-                {server.ip}
-              </Table.Cell>
-              <Table.Cell>
-                {server.version}
-              </Table.Cell>
+              <Table.HeaderCell>
+                <FormattedMessage id='SERVER_NAME'/>
+              </Table.HeaderCell>
+              <Table.HeaderCell>
+                <FormattedMessage id='CURRENT_PLAYERS'/>
+              </Table.HeaderCell>
+              <Table.HeaderCell>
+                <FormattedMessage id='MAX_PLAYERS'/>
+              </Table.HeaderCell>
+              <Table.HeaderCell>
+                <FormattedMessage id='DAY_TIME'/>
+              </Table.HeaderCell>
+              <Table.HeaderCell>
+                <FormattedMessage id='IP_ADDRESS'/>
+              </Table.HeaderCell>
+              <Table.HeaderCell>
+                <FormattedMessage id='VERSION'/>
+              </Table.HeaderCell>
             </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>
+          </Table.Header>
+          <Table.Body>
+            {this.props.servers.map(server => (
+              <Table.Row>
+                <Table.Cell>
+                  {server.name}
+                </Table.Cell>
+                <Table.Cell>
+                  {server.currentPlayers}
+                </Table.Cell>
+                <Table.Cell>
+                  {server.maxPlayers}
+                </Table.Cell>
+                <Table.Cell>
+                  <FontAwesomeIcon icon={getDayTimeIcon(server.dayTime)}/>
+                  <span className='server-day-time'>{server.dayTime}</span>
+                </Table.Cell>
+                <Table.Cell>
+                  {server.ip}
+                </Table.Cell>
+                <Table.Cell>
+                  {server.version}
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
+      </div>
     )
   }
 }

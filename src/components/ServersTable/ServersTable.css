@@ -1,3 +1,8 @@
 .server-day-time {
     margin-left: 5px;
 }
+
+.server-browser-table-component {
+    height: 80vh;
+    overflow-y: scroll;
+}

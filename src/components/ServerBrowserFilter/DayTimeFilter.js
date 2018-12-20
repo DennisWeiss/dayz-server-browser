@@ -19,17 +19,27 @@ class DayTimeFilter extends React.Component {
 
   state = {
     includeTime: this.props.defaultIncludeTime,
-    timeRange: [600, 840]
+    timeRange: this.props.defaultTimeRange || [600, 840]
+  }
+
+  onChangeDayTime = () => {
+    if (this.props.onDayTimeChange) {
+      this.props.onDayTimeChange(this.state.includeTime, this.state.timeRange)
+    }
+  }
+
+  onChangeIncludeTime(includeTime) {
+    this.setState({includeTime}, this.onChangeDayTime)
   }
 
   onTimeRangeChange(timeRange) {
-    this.setState({timeRange})
+    this.setState({timeRange}, this.onChangeDayTime)
   }
 
   render() {
     return (
       <div className='day-time-slider'>
-        <ThreeStateCheckbox title={<FormattedMessage id='INCLUDE_TIME'/>}/>
+        <ThreeStateCheckbox title={<FormattedMessage id='INCLUDE_TIME'/>} onClick={this.onChangeIncludeTime.bind(this)}/>
         <Slider range
                 min={0}
                 max={24 * 60 - 1}

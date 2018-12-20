@@ -53,3 +53,11 @@ code {
 .ant-slider-mark-text {
     color: rgba(255, 255, 255, 0.8) !important;
 }
+
+body ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+body ::-webkit-scrollbar-thumb:hover {
+    background: rgba(64, 64, 64, 0.9);
+}
