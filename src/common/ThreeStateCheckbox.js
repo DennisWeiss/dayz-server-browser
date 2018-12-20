@@ -32,14 +32,14 @@ class ThreeStateCheckbox extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='three-state-checkbox-wrapper'>
         <div className='three-state-checkbox' onClick={this.onClick.bind(this)}>
           {(this.props.checked ? this.props.checked === 'positive' : this.state.checked === 'positive') &&
           <div className='three-state-checkbox-icon-pos'><FontAwesomeIcon icon={faCheck}/></div>}
           {(this.props.checked ? this.props.checked === 'negative' : this.state.checked === 'negative') &&
           <div className='three-state-checkbox-icon-neg'><FontAwesomeIcon icon={faTimes}/></div>}
         </div>
-        <div className='three-state-checkbox-title'>
+        <div className='three-state-checkbox-title' onClick={this.onClick.bind(this)}>
           {this.props.title}
         </div>
       </div>
