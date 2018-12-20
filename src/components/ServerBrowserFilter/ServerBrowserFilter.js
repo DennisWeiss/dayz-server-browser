@@ -1,15 +1,15 @@
 import React from 'react'
 import './ServerBrowserFilter.css'
-import {Card} from 'semantic-ui-react'
+import {faFilter} from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 
 class ServerBrowserFilter extends React.Component {
   render() {
     return (
       <div className='server-browser-filter'>
-        <Card>
-          Filter
-        </Card>
+          <FontAwesomeIcon size='lg' icon={faFilter}/>
+        <span className='filter-heading'>Filter</span>
       </div>
     )
   }
