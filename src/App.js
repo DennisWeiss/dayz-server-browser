@@ -2,13 +2,23 @@ import React, {Component} from 'react'
 import logo from './logo.svg'
 import './App.css'
 import ServerBrowserPage from './components/ServerBrowserPage/ServerBrowserPage'
+import translations from './conf/translations'
+import {IntlProvider} from 'react-intl'
+
 
 class App extends Component {
+
+  state = {
+    locale: 'en'
+  }
+
   render() {
     return (
-      <div className="App">
-        <ServerBrowserPage/>
-      </div>
+      <IntlProvider locale={this.state.locale} messages={translations[this.state.locale]}>
+        <div className="App">
+          <ServerBrowserPage/>
+        </div>
+      </IntlProvider>
     )
   }
 }
