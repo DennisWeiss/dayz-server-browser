@@ -9,6 +9,7 @@ class ServerBrowserFilter extends React.Component {
     return (
       <div className='server-browser-filter'>
           <FontAwesomeIcon size='lg' icon={faFilter}/>
+
         <span className='filter-heading'>Filter</span>
       </div>
     )

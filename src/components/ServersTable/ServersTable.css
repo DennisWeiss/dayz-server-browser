@@ -1,15 +1,3 @@
 .server-day-time {
     margin-left: 5px;
 }
-
-.ui.tabular.menu .item {
-    color: #dddddd;
-}
-
-.ui.tabular.menu .item:hover {
-    color: #ffffff;
-}
-
-.ui.tabular.menu .active.item:hover {
-    color: rgba(0, 0, 0, 0.97);
-}
