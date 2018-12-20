@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import ThreeStateCheckbox from '../../common/ThreeStateCheckbox'
 import {FormattedMessage} from 'react-intl'
 import {Input} from 'semantic-ui-react'
+import {debounce} from '../../helper/helperfunctions'
 
 
 class ServerBrowserFilter extends React.Component {
