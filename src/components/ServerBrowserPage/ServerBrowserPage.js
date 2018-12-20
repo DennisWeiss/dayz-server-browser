@@ -43,6 +43,23 @@ const isFull = server => server.currentPlayers >= server.maxPlayers
 const filterByFullServer = (server, fullServerFilter) => fullServerFilter === 'neutral' ||
   fullServerFilter === 'positive' && isFull(server) || fullServerFilter === 'negative' && !isFull(server)
 
+const getMinutesOfDayTime = dayTime => {
+  if (!dayTime || !dayTime.includes(':')) {
+    return 0
+  }
+  const dayTimeLst = dayTime.split(':')
+  return parseInt(dayTimeLst[0], 10) * 60 + parseInt(dayTimeLst[1], 10)
+}
+
+const isInDayTimeRange = (dayTime, dayTimeFiterRange) => {
+  const minutes = getMinutesOfDayTime(dayTime)
+  return dayTimeFiterRange[0] <= minutes && minutes <= dayTimeFiterRange[1]
+}
+
+const filterByDayTime = (server, dayTimeFilter) => dayTimeFilter[0] === 'neutral' ||
+  dayTimeFilter[0] === 'positive' && isInDayTimeRange(server.dayTime, dayTimeFilter[1]) ||
+  dayTimeFilter[0] === 'negative' && !isInDayTimeRange(server.dayTime, dayTimeFilter[1])
+
 class ServerBrowserPage extends React.Component {
 
   state = {
@@ -51,7 +68,8 @@ class ServerBrowserPage extends React.Component {
       day: 'neutral',
       serverName: '',
       ip: '',
-      fullServer: 'neutral'
+      fullServer: 'neutral',
+      dayTime: ['neutral', [600, 840]]
     },
     filteredServers: [],
   }
@@ -88,7 +106,8 @@ class ServerBrowserPage extends React.Component {
       filterByDay(server, this.state.filter.day) &&
       filterByServerName(server, this.state.filter.serverName) &&
       filterByIp(server, this.state.filter.ip) &&
-      filterByFullServer(server, this.state.filter.fullServer)
+      filterByFullServer(server, this.state.filter.fullServer) &&
+      filterByDayTime(server, this.state.filter.dayTime)
     )
     this.setState({filteredServers})
   }
@@ -111,6 +130,12 @@ class ServerBrowserPage extends React.Component {
     this.setState({filter}, this.filterServers)
   }
 
+  onDayTimeChange(includeDayTime, dayTime) {
+    const filter = {...this.state.filter}
+    filter.dayTime = [includeDayTime, dayTime]
+    this.setState({filter}, this.filterServers)
+  }
+
   render() {
     return (
       <div className='server-browser-page'>
@@ -121,7 +146,8 @@ class ServerBrowserPage extends React.Component {
           <ServerBrowserFilter onChangeDayFilter={this.onChangeDayFilter.bind(this)}
                                onSearchByNameChange={this.onSearchByNameChange.bind(this)}
                                onIpChange={this.onIpChange.bind(this)}
-                               onChangeFullServerFilter={this.onChangeFullServerFilter.bind(this)}/>
+                               onChangeFullServerFilter={this.onChangeFullServerFilter.bind(this)}
+                               onDayTimeChange={this.onDayTimeChange.bind(this)}/>
         </div>
       </div>
     )

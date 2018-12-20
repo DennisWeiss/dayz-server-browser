@@ -27,7 +27,7 @@ class ServerBrowserFilter extends React.Component {
           <br/>
           <ThreeStateCheckbox title={<FormattedMessage id='DAY'/>} onClick={this.props.onChangeDayFilter}/>
           <br/>
-          <DayTimeFilter/>
+          <DayTimeFilter onDayTimeChange={this.props.onDayTimeChange}/>
         </div>
       </div>
     )

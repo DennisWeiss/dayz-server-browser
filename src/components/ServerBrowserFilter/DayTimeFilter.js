@@ -18,7 +18,7 @@ const getDayTimeMarks = interval => {
 class DayTimeFilter extends React.Component {
 
   state = {
-    includeTime: this.props.defaultIncludeTime,
+    includeTime: this.props.defaultIncludeTime || 'neutral',
     timeRange: this.props.defaultTimeRange || [600, 840]
   }
 
@@ -39,7 +39,9 @@ class DayTimeFilter extends React.Component {
   render() {
     return (
       <div className='day-time-slider'>
-        <ThreeStateCheckbox title={<FormattedMessage id='INCLUDE_TIME'/>} onClick={this.onChangeIncludeTime.bind(this)}/>
+        <ThreeStateCheckbox title={<FormattedMessage id='INCLUDE_TIME'/>}
+                            checked={this.state.includeTime}
+                            onClick={this.onChangeIncludeTime.bind(this)}/>
         <Slider range
                 min={0}
                 max={24 * 60 - 1}
