@@ -4,6 +4,7 @@ import {faFilter} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import ThreeStateCheckbox from '../../common/ThreeStateCheckbox'
 import {FormattedMessage} from 'react-intl'
+import {Input} from 'semantic-ui-react'
 
 
 class ServerBrowserFilter extends React.Component {
@@ -14,7 +15,8 @@ class ServerBrowserFilter extends React.Component {
         <FontAwesomeIcon size='lg' icon={faFilter}/>
         <span className='filter-heading'>Filter</span>
         <div className='filter-content'>
-          <ThreeStateCheckbox title='Day' onClick={this.props.onChangeDayFilter}/>
+          <Input placeholder='Search by name' onChange={this.props.onSearchByNameChange}/>
+          <ThreeStateCheckbox title={<FormattedMessage id='DAY'/>} onClick={this.props.onChangeDayFilter}/>
         </div>
       </div>
     )
