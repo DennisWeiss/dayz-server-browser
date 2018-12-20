@@ -1,6 +1,6 @@
 import React from 'react'
-import ServersTable from "../ServersTable/ServersTable";
-import ServerBrowserFilter from "../ServerBrowserFilter/ServerBrowserFilter";
+import ServersTable from '../ServersTable/ServersTable'
+import ServerBrowserFilter from '../ServerBrowserFilter/ServerBrowserFilter'
 
 
 class ServerBrowserPage extends React.Component {

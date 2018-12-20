@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import ServerBrowserPage from "./components/ServerBrowserPage/ServerBrowserPage";
+import React, {Component} from 'react'
+import logo from './logo.svg'
+import './App.css'
+import ServerBrowserPage from './components/ServerBrowserPage/ServerBrowserPage'
 
 class App extends Component {
   render() {
@@ -9,8 +9,8 @@ class App extends Component {
       <div className="App">
         <ServerBrowserPage/>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
