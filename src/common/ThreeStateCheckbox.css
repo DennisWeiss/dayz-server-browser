@@ -1,0 +1,25 @@
+.three-state-checkbox {
+    padding: -2px;
+    width: 17px;
+    height: 17px;
+    border: 1px solid #aaaaaa;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.three-state-checkbox-title {
+    color: white;
+    cursor: pointer;
+}
+
+.three-state-checkbox-icon-pos {
+    color: limegreen;
+    margin-top: -2px;
+    font-size: 0.9em;
+}
+
+.three-state-checkbox-icon-neg {
+    color: red;
+    margin-top: -2px;
+    font-size: 1.1em;
+}
