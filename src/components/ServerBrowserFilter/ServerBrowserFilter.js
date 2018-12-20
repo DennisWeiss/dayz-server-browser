@@ -16,7 +16,7 @@ class ServerBrowserFilter extends React.Component {
         <FontAwesomeIcon size='lg' icon={faFilter}/>
         <span className='filter-heading'>Filter</span>
         <div className='filter-content'>
-          <Input placeholder='Search by name' onChange={this.props.onSearchByNameChange}/>
+          <Input placeholder='Search by name' onChange={debounce(this.props.onSearchByNameChange, 500, false)}/>
           <ThreeStateCheckbox title={<FormattedMessage id='DAY'/>} onClick={this.props.onChangeDayFilter}/>
         </div>
       </div>
