@@ -49,20 +49,20 @@ class ServersTable extends React.Component {
         <Table.Body>
           {this.props.servers.map(server => (
             <Table.Row>
-              <Table.Cell>
+              <Table.Cell >
                 {server.name}
               </Table.Cell>
-              <Table.Cell>
+              <Table.Cell >
                 {server.currentPlayers}
               </Table.Cell>
-              <Table.Cell>
+              <Table.Cell >
                 {server.maxPlayers}
               </Table.Cell>
-              <Table.Cell>
+              <Table.Cell >
                 <FontAwesomeIcon icon={getDayTimeIcon(server.dayTime)}/>
                 <span className='server-day-time'>{server.dayTime}</span>
               </Table.Cell>
-              <Table.Cell>
+              <Table.Cell >
                 {server.ip}
               </Table.Cell>
               <Table.Cell>

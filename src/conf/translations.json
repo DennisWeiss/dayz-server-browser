@@ -1,5 +1,18 @@
 {
   "en": {
-
+    "SERVER_NAME": "Server name",
+    "CURRENT_PLAYERS": "Players",
+    "MAX_PLAYERS": "Max players",
+    "DAY_TIME": "Day time",
+    "IP_ADDRESS": "IP address",
+    "VERSION": "Version"
+  },
+  "de": {
+    "SERVER_NAME": "Servername",
+    "CURRENT_PLAYERS": "Spieler",
+    "MAX_PLAYERS": "Max. Spieler",
+    "DAY_TIME": "Tageszeit",
+    "IP_ADDRESS": "IP-Adresse",
+    "VERSION": "Version"
   }
 }

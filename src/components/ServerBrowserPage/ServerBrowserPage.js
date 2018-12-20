@@ -4,6 +4,8 @@ import './ServerBrowserPage.css'
 import {Tab} from 'semantic-ui-react'
 import {FormattedMessage} from 'react-intl'
 import ServerBrowser from './ServerBrowser'
+import ServerBrowserFilter from '../ServerBrowserFilter/ServerBrowserFilter'
+import ServersTable from '../ServersTable/ServersTable'
 
 
 const mapServer = server => {
@@ -38,18 +40,27 @@ class ServerBrowserPage extends React.Component {
   panes = () => [{
     menuItem: 'OFFICIAL_SERVERS', render: () => (
       <Tab.Pane>
-        <ServerBrowser servers={this.state.servers} private={false}/>
+        <ServersTable servers={this.state.servers.filter(server => !server.privHive)}/>
       </Tab.Pane>
     )
   }, {
     menuItem: 'COMMUNITY_SERVERS', render: () =>
       <Tab.Pane>
-        <ServerBrowser servers={this.state.servers} private={true}/>
+        <ServersTable servers={this.state.servers.filter(server => server.privHive)}/>
       </Tab.Pane>
   }]
 
   render() {
-    return <Tab panes={this.panes()}/>
+    return (
+      <div className='server-browser-page'>
+        <div className='server-browser-tables'>
+          <Tab panes={this.panes()}/>
+        </div>
+        <div>
+          <ServerBrowserFilter/>
+        </div>
+      </div>
+    )
   }
 }
 
