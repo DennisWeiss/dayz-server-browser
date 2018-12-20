@@ -17,6 +17,9 @@ class ServerBrowserFilter extends React.Component {
         <span className='filter-heading'>Filter</span>
         <div className='filter-content'>
           <Input placeholder='Search by name' onChange={debounce(this.props.onSearchByNameChange, 500, false)}/>
+          <br/>
+          <Input placeholder='Search by IP' onChange={debounce(this.props.onIpChange, 500, false)}/>
+          <br/>
           <ThreeStateCheckbox title={<FormattedMessage id='DAY'/>} onClick={this.props.onChangeDayFilter}/>
         </div>
       </div>

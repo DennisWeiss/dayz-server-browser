@@ -36,13 +36,16 @@ const filterByDay = (server, dayFilter) => dayFilter === 'neutral' || dayFilter 
 const filterByServerName = (server, serverNameFilter) => !serverNameFilter ||
   server.name.toLowerCase().includes(serverNameFilter.toLowerCase())
 
+const filterByIp = (server, ipFilter) => !ipFilter || server.ip.includes(ipFilter)
+
 class ServerBrowserPage extends React.Component {
 
   state = {
     servers: [],
     filter: {
       day: 'neutral',
-      serverName: ''
+      serverName: '',
+      ip: ''
     },
     filteredServers: [],
   }
@@ -77,14 +80,21 @@ class ServerBrowserPage extends React.Component {
   filterServers() {
     const filteredServers = this.state.servers.filter(server =>
       filterByDay(server, this.state.filter.day) &&
-      filterByServerName(server, this.state.filter.serverName
-      ))
+      filterByServerName(server, this.state.filter.serverName) &&
+      filterByIp(server, this.state.filter.ip)
+    )
     this.setState({filteredServers})
   }
 
   onSearchByNameChange(event, data) {
     const filter = {...this.state.filter}
     filter.serverName = data.value
+    this.setState({filter}, this.filterServers)
+  }
+
+  onIpChange(event, data) {
+    const filter = {...this.state.filter}
+    filter.ip = data.value
     this.setState({filter}, this.filterServers)
   }
 
@@ -96,7 +106,8 @@ class ServerBrowserPage extends React.Component {
         </div>
         <div>
           <ServerBrowserFilter onChangeDayFilter={this.onChangeDayFilter.bind(this)}
-                               onSearchByNameChange={this.onSearchByNameChange.bind(this)}/>
+                               onSearchByNameChange={this.onSearchByNameChange.bind(this)}
+                               onIpChange={this.onIpChange.bind(this)}/>
         </div>
       </div>
     )
