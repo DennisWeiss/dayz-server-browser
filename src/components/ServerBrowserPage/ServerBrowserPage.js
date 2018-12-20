@@ -38,6 +38,11 @@ const filterByServerName = (server, serverNameFilter) => !serverNameFilter ||
 
 const filterByIp = (server, ipFilter) => !ipFilter || server.ip.includes(ipFilter)
 
+const isFull = server => server.currentPlayers >= server.maxPlayers
+
+const filterByFullServer = (server, fullServerFilter) => fullServerFilter === 'neutral' ||
+  fullServerFilter === 'positive' && isFull(server) || fullServerFilter === 'negative' && !isFull(server)
+
 class ServerBrowserPage extends React.Component {
 
   state = {
@@ -45,7 +50,8 @@ class ServerBrowserPage extends React.Component {
     filter: {
       day: 'neutral',
       serverName: '',
-      ip: ''
+      ip: '',
+      fullServer: 'neutral'
     },
     filteredServers: [],
   }
@@ -81,7 +87,8 @@ class ServerBrowserPage extends React.Component {
     const filteredServers = this.state.servers.filter(server =>
       filterByDay(server, this.state.filter.day) &&
       filterByServerName(server, this.state.filter.serverName) &&
-      filterByIp(server, this.state.filter.ip)
+      filterByIp(server, this.state.filter.ip) &&
+      filterByFullServer(server, this.state.filter.fullServer)
     )
     this.setState({filteredServers})
   }
@@ -98,6 +105,12 @@ class ServerBrowserPage extends React.Component {
     this.setState({filter}, this.filterServers)
   }
 
+  onChangeFullServerFilter(value) {
+    const filter = {...this.state.filter}
+    filter.fullServer = value
+    this.setState({filter}, this.filterServers)
+  }
+
   render() {
     return (
       <div className='server-browser-page'>
@@ -107,7 +120,8 @@ class ServerBrowserPage extends React.Component {
         <div>
           <ServerBrowserFilter onChangeDayFilter={this.onChangeDayFilter.bind(this)}
                                onSearchByNameChange={this.onSearchByNameChange.bind(this)}
-                               onIpChange={this.onIpChange.bind(this)}/>
+                               onIpChange={this.onIpChange.bind(this)}
+                               onChangeFullServerFilter={this.onChangeFullServerFilter.bind(this)}/>
         </div>
       </div>
     )

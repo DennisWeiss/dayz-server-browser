@@ -21,6 +21,8 @@ class ServerBrowserFilter extends React.Component {
           <Input placeholder='Search by IP' onChange={debounce(this.props.onIpChange, 500, false)}/>
           <br/>
           <ThreeStateCheckbox title={<FormattedMessage id='DAY'/>} onClick={this.props.onChangeDayFilter}/>
+          <br/>
+          <ThreeStateCheckbox title={<FormattedMessage id='FULL_SERVER'/>} onClick={this.props.onChangeFullServerFilter}/>
         </div>
       </div>
     )
