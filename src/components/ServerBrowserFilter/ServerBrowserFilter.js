@@ -7,12 +7,15 @@ import {FormattedMessage} from 'react-intl'
 
 
 class ServerBrowserFilter extends React.Component {
+
   render() {
     return (
       <div className='server-browser-filter'>
         <FontAwesomeIcon size='lg' icon={faFilter}/>
         <span className='filter-heading'>Filter</span>
-        <ThreeStateCheckbox title='Day'/>
+        <div className='filter-content'>
+          <ThreeStateCheckbox title='Day' onClick={this.props.onChangeDayFilter}/>
+        </div>
       </div>
     )
   }

@@ -22,17 +22,31 @@ const mapServer = server => {
   }
 }
 
+const isDay = dayTime => {
+  if (!dayTime || !dayTime.includes(':')) {
+    return false
+  }
+  const hour = parseInt(dayTime.split(':')[0], 10)
+  return hour >= 6 && hour < 18
+}
+
+const filterByDay = (server, dayFilter) => dayFilter === 'neutral' || dayFilter === 'positive' && isDay(server.dayTime) ||
+  dayFilter === 'negative' && !isDay(server.dayTime)
 
 class ServerBrowserPage extends React.Component {
 
   state = {
-    servers: []
+    servers: [],
+    filter: {
+      day: 'neutral'
+    },
+    filteredServers: []
   }
 
   componentDidMount() {
     getAllDayZServers().then(res => {
       if (res.data && res.data.response && res.data.response) {
-        this.setState({servers: res.data.response.servers.map(mapServer)})
+        this.setState({servers: res.data.response.servers.map(mapServer)}, this.filterServers)
       }
     })
   }
@@ -40,15 +54,26 @@ class ServerBrowserPage extends React.Component {
   panes = () => [{
     menuItem: 'OFFICIAL_SERVERS', render: () => (
       <Tab.Pane>
-        <ServersTable servers={this.state.servers.filter(server => !server.privHive)}/>
+        <ServersTable servers={this.state.filteredServers.filter(server => !server.privHive)}/>
       </Tab.Pane>
     )
   }, {
     menuItem: 'COMMUNITY_SERVERS', render: () =>
       <Tab.Pane>
-        <ServersTable servers={this.state.servers.filter(server => server.privHive)}/>
+        <ServersTable servers={this.state.filteredServers.filter(server => server.privHive)}/>
       </Tab.Pane>
   }]
+
+  onChangeDayFilter(value) {
+    const filter = {...this.state.filter}
+    filter.day = value
+    this.setState({filter}, this.filterServers)
+  }
+
+  filterServers() {
+    const filteredServers = this.state.servers.filter(server => filterByDay(server, this.state.filter.day))
+    this.setState({filteredServers})
+  }
 
   render() {
     return (
@@ -57,7 +82,7 @@ class ServerBrowserPage extends React.Component {
           <Tab panes={this.panes()}/>
         </div>
         <div>
-          <ServerBrowserFilter/>
+          <ServerBrowserFilter onChangeDayFilter={this.onChangeDayFilter.bind(this)}/>
         </div>
       </div>
     )
