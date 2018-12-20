@@ -1,8 +1,9 @@
 import React from 'react'
-import ServersTable from '../ServersTable/ServersTable'
-import ServerBrowserFilter from '../ServerBrowserFilter/ServerBrowserFilter'
 import {getAllDayZServers} from '../../requests/dayz-servers'
 import './ServerBrowserPage.css'
+import {Tab} from 'semantic-ui-react'
+import {FormattedMessage} from 'react-intl'
+import ServerBrowser from './ServerBrowser'
 
 
 const mapServer = server => {
@@ -34,13 +35,21 @@ class ServerBrowserPage extends React.Component {
     })
   }
 
-  render() {
-    return (
-      <div className="server-browser-page">
-        <ServersTable servers={this.state.servers.filter(server => !server.privHive)}/>
-        <ServerBrowserFilter/>
-      </div>
+  panes = () => [{
+    menuItem: 'OFFICIAL_SERVERS', render: () => (
+      <Tab.Pane>
+        <ServerBrowser servers={this.state.servers} private={false}/>
+      </Tab.Pane>
     )
+  }, {
+    menuItem: 'COMMUNITY_SERVERS', render: () =>
+      <Tab.Pane>
+        <ServerBrowser servers={this.state.servers} private={true}/>
+      </Tab.Pane>
+  }]
+
+  render() {
+    return <Tab panes={this.panes()}/>
   }
 }
 
