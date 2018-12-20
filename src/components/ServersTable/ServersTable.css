@@ -3,6 +3,6 @@
 }
 
 .server-browser-table-component {
-    height: 80vh;
+    height: calc(100vh - 150px);
     overflow-y: scroll;
 }
