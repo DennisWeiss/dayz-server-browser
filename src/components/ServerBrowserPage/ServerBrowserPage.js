@@ -76,7 +76,7 @@ const serverComparator = column => (a, b) => {
     case 'maxPlayers':
       return b.maxPlayers - a.maxPlayers
     case 'dayTime':
-      return getMinutesOfDayTime(b.dayTime) - getMinutesOfDayTime(a.dayTime)
+      return getMinutesOfDayTime(a.dayTime) - getMinutesOfDayTime(b.dayTime)
     default:
       return 0
   }
@@ -165,7 +165,8 @@ class ServerBrowserPage extends React.Component {
       filterByIp(server, this.state.filter.ip) &&
       filterByFullServer(server, this.state.filter.fullServer) &&
       filterByDayTime(server, this.state.filter.dayTime)
-    )
+    ).sort((a, b) => (this.state.sorting.direction === 'ascending' ? 1 : -1) *
+      serverComparator(this.state.sorting.column)(a, b))
     this.setState({filteredServers})
   }
 
