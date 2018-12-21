@@ -137,7 +137,7 @@ class ServerBrowserPage extends React.Component {
   }
 
   panes = () => [{
-    menuItem: 'OFFICIAL_SERVERS', render: () => (
+    menuItem: 'Official servers', render: () => (
       <Tab.Pane>
         <ServersTable
           key={uuidv1()}
@@ -148,7 +148,7 @@ class ServerBrowserPage extends React.Component {
       </Tab.Pane>
     )
   }, {
-    menuItem: 'COMMUNITY_SERVERS', render: () =>
+    menuItem: 'Community servers', render: () =>
       <Tab.Pane>
         <ServersTable
           key={uuidv1()}

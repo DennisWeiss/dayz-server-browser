@@ -5,6 +5,7 @@ import {faSun, faMoon} from '@fortawesome/free-regular-svg-icons'
 import {faSortUp, faSortDown, faLock, faLockOpen} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import './ServersTable.css'
+import classNames from 'classnames'
 
 
 const getDayTimeIcon = dayTime => {
@@ -61,21 +62,21 @@ class ServersTable extends React.Component {
                   {this.getSortIcon('name')}
                 </Table.HeaderCell>
                 <Table.HeaderCell
-                  className='sortable-header-cell'
+                  className={classNames(['sortable-header-cell', 'col-number'])}
                   sorted={this.props.sorting.column === 'currentPlayers' ? this.props.sorting.direction : null}
                   onClick={this.props.handleSort('currentPlayers')}>
                   <span className='sortable-header-cell-title'>Players</span>
                   {this.getSortIcon('currentPlayers')}
                 </Table.HeaderCell>
                 <Table.HeaderCell
-                  className='sortable-header-cell'
+                  className={classNames(['sortable-header-cell', 'col-number'])}
                   sorted={this.props.sorting.column === 'maxPlayers' ? this.props.sorting.direction : null}
                   onClick={this.props.handleSort('maxPlayers')}>
                   <span className='sortable-header-cell-title'>Max players</span>
                   {this.getSortIcon('maxPlayers')}
                 </Table.HeaderCell>
                 <Table.HeaderCell
-                  className='sortable-header-cell'
+                  className={classNames(['sortable-header-cell', 'col-daytime'])}
                   sorted={this.props.sorting.column === 'dayTime' ? this.props.sorting.direction : null}
                   onClick={this.props.handleSort('dayTime')}>
                   <span className='sortable-header-cell-title'>Day time</span>
@@ -104,14 +105,14 @@ class ServersTable extends React.Component {
                     <Table.Cell width={1} className='col-number'>
                       {server.currentPlayers}
                     </Table.Cell>
-                    <Table.Cell width={1} className='col-number'>
+                    <Table.Cell width={2} className='col-number'>
                       {server.maxPlayers}
                     </Table.Cell>
                     <Table.Cell width={2} className='col-daytime'>
                       <FontAwesomeIcon icon={getDayTimeIcon(server.dayTime)}/>
                       <span className='server-day-time'>{server.dayTime}</span>
                     </Table.Cell>
-                    <Table.Cell width={3}>
+                    <Table.Cell width={2}>
                       {server.ip}
                     </Table.Cell>
                     <Table.Cell width={2}>
