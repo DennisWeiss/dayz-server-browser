@@ -17,7 +17,7 @@ const mapServer = server => {
     currentPlayers: server.players,
     maxPlayers: server.max_players,
     dayTime: gameTypeLst.length > 0 ? gameTypeLst[gameTypeLst.length - 1] : '',
-    ip: `${server.addr.split(':')[0]}:${server.gameport}`,
+    ip: server.addr,
     version: server.version,
     privHive: gameTypeLst.includes('privHive')
   }

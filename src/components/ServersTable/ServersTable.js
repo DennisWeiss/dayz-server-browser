@@ -1,5 +1,5 @@
 import React from 'react'
-import {Table, Pagination} from 'semantic-ui-react'
+import {Table, Pagination, Button} from 'semantic-ui-react'
 import {FormattedMessage} from 'react-intl'
 import {faSun, faMoon} from '@fortawesome/free-regular-svg-icons'
 import {faSortUp, faSortDown} from '@fortawesome/free-solid-svg-icons'
@@ -102,6 +102,7 @@ class ServersTable extends React.Component {
                   <Table.Row>
                     <Table.Cell width={8}>
                       {server.name}
+                      {/*<Button primary onClick={() => window.open(`steam://connect/${server.addr}`)} >Play</Button>*/}
                     </Table.Cell>
                     <Table.Cell width={1} className='col-number'>
                       {server.currentPlayers}
