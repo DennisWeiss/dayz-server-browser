@@ -10,3 +10,7 @@
 .server-browser-table-paginator {
     margin-top: 10px;
 }
+
+.sortable-header-cell {
+    cursor: pointer !important;
+}

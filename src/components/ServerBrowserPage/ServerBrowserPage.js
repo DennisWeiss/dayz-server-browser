@@ -61,6 +61,27 @@ const filterByDayTime = (server, dayTimeFilter) => dayTimeFilter[0] === 'neutral
   dayTimeFilter[0] === 'positive' && isInDayTimeRange(server.dayTime, dayTimeFilter[1]) ||
   dayTimeFilter[0] === 'negative' && !isInDayTimeRange(server.dayTime, dayTimeFilter[1])
 
+const serverComparator = column => (a, b) => {
+  switch (column) {
+    case 'name':
+      if (a.name < b.name) {
+        return -1
+      }
+      if (a.name > b.name) {
+        return 1
+      }
+      return 0
+    case 'currentPlayers':
+      return b.currentPlayers - a.currentPlayers
+    case 'maxPlayers':
+      return b.maxPlayers - a.maxPlayers
+    case 'dayTime':
+      return getMinutesOfDayTime(b.dayTime) - getMinutesOfDayTime(a.dayTime)
+    default:
+      return 0
+  }
+}
+
 class ServerBrowserPage extends React.Component {
 
   state = {
@@ -73,6 +94,10 @@ class ServerBrowserPage extends React.Component {
       dayTime: ['neutral', [600, 840]]
     },
     filteredServers: [],
+    sorting: {
+      column: null,
+      direction: null
+    }
   }
 
   componentDidMount() {
@@ -83,16 +108,47 @@ class ServerBrowserPage extends React.Component {
     })
   }
 
+  handleSort = clickedColumn => () => {
+    console.log('handleSort', clickedColumn, this.state.sorting)
+    if (this.state.sorting.column !== clickedColumn) {
+      this.setState({
+        filteredServers: [...this.state.filteredServers].sort(serverComparator(clickedColumn)),
+        sorting: {
+          column: clickedColumn,
+          direction: 'ascending'
+        }
+      })
+    } else {
+      this.setState({
+        filteredServers: this.state.filteredServers.reverse(),
+        sorting: {
+          column: this.state.sorting.column,
+          direction: this.state.sorting.direction === 'ascending' ? 'descending' : 'ascending'
+        }
+      })
+    }
+  }
+
   panes = () => [{
     menuItem: 'OFFICIAL_SERVERS', render: () => (
       <Tab.Pane>
-        <ServersTable key={uuidv1()} servers={this.state.filteredServers.filter(server => !server.privHive)} pageSize={200}/>
+        <ServersTable
+          key={uuidv1()}
+          servers={this.state.filteredServers.filter(server => !server.privHive)}
+          pageSize={200}
+          sorting={this.state.sorting}
+          handleSort={this.handleSort}/>
       </Tab.Pane>
     )
   }, {
     menuItem: 'COMMUNITY_SERVERS', render: () =>
       <Tab.Pane>
-        <ServersTable key={uuidv1()} servers={this.state.filteredServers.filter(server => server.privHive)} pageSize={200}/>
+        <ServersTable
+          key={uuidv1()}
+          servers={this.state.filteredServers.filter(server => server.privHive)}
+          pageSize={200}
+          sorting={this.state.sorting}
+          handleSort={this.handleSort}/>
       </Tab.Pane>
   }]
 

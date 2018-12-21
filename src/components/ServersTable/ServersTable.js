@@ -47,17 +47,29 @@ class ServersTable extends React.Component {
           <Table celled>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell>
-                  <FormattedMessage id='SERVER_NAME'/>
+                <Table.HeaderCell
+                  className='sortable-header-cell'
+                  sorted={this.props.sorting.column === 'name' ? this.props.sorting.direction : null}
+                  onClick={this.props.handleSort('name')}>
+                  Server name
                 </Table.HeaderCell>
-                <Table.HeaderCell>
-                  <FormattedMessage id='CURRENT_PLAYERS'/>
+                <Table.HeaderCell
+                  className='sortable-header-cell'
+                  sorted={this.props.sorting.column === 'currentPlayers' ? this.props.sorting.direction : null}
+                  onClick={this.props.handleSort('currentPlayers')}>
+                  Players
                 </Table.HeaderCell>
-                <Table.HeaderCell>
-                  <FormattedMessage id='MAX_PLAYERS'/>
+                <Table.HeaderCell
+                  className='sortable-header-cell'
+                  sorted={this.props.sorting.column === 'maxPlayers' ? this.props.sorting.direction : null}
+                  onClick={this.props.handleSort('maxPlayers')}>
+                  Max players
                 </Table.HeaderCell>
-                <Table.HeaderCell>
-                  <FormattedMessage id='DAY_TIME'/>
+                <Table.HeaderCell
+                  className='sortable-header-cell'
+                  sorted={this.props.sorting.column === 'dayTime' ? this.props.sorting.direction : null}
+                  onClick={this.props.handleSort('dayTime')}>
+                  Day time
                 </Table.HeaderCell>
                 <Table.HeaderCell>
                   <FormattedMessage id='IP_ADDRESS'/>
