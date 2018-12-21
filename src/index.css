@@ -19,6 +19,10 @@ code {
     background: rgba(0, 0, 0, 0);
 }
 
+/*tr:nth-child(odd) {*/
+    /*background: rgba(0, 0, 0, 0.1);*/
+/*}*/
+
 .ui.menu .item {
     color: rgba(255, 255, 255, 0.7);
 }

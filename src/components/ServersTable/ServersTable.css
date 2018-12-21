@@ -14,3 +14,11 @@
 .sortable-header-cell {
     cursor: pointer !important;
 }
+
+.col-number {
+    text-align: right !important;
+}
+
+.col-daytime {
+    text-align: center !important;
+}

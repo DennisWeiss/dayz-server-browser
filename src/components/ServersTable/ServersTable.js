@@ -84,23 +84,23 @@ class ServersTable extends React.Component {
                 .slice((this.state.activePage - 1) * this.props.pageSize, this.state.activePage * this.props.pageSize)
                 .map(server => (
                   <Table.Row>
-                    <Table.Cell>
+                    <Table.Cell width={8}>
                       {server.name}
                     </Table.Cell>
-                    <Table.Cell>
+                    <Table.Cell width={1} className='col-number'>
                       {server.currentPlayers}
                     </Table.Cell>
-                    <Table.Cell>
+                    <Table.Cell width={1} className='col-number'>
                       {server.maxPlayers}
                     </Table.Cell>
-                    <Table.Cell>
+                    <Table.Cell width={2} className='col-daytime'>
                       <FontAwesomeIcon icon={getDayTimeIcon(server.dayTime)}/>
                       <span className='server-day-time'>{server.dayTime}</span>
                     </Table.Cell>
-                    <Table.Cell>
+                    <Table.Cell width={3}>
                       {server.ip}
                     </Table.Cell>
-                    <Table.Cell>
+                    <Table.Cell width={2}>
                       {server.version}
                     </Table.Cell>
                   </Table.Row>
