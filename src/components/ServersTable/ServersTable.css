@@ -3,6 +3,10 @@
 }
 
 .server-browser-table-component {
-    height: calc(100vh - 150px);
+    height: calc(100vh - 200px);
     overflow-y: scroll;
+}
+
+.server-browser-table-paginator {
+    margin-top: 10px;
 }

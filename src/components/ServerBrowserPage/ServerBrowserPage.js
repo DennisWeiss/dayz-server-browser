@@ -6,6 +6,7 @@ import {FormattedMessage} from 'react-intl'
 import ServerBrowser from './ServerBrowser'
 import ServerBrowserFilter from '../ServerBrowserFilter/ServerBrowserFilter'
 import ServersTable from '../ServersTable/ServersTable'
+import uuidv1 from 'uuid/v1'
 
 
 const mapServer = server => {
@@ -85,13 +86,13 @@ class ServerBrowserPage extends React.Component {
   panes = () => [{
     menuItem: 'OFFICIAL_SERVERS', render: () => (
       <Tab.Pane>
-        <ServersTable servers={this.state.filteredServers.filter(server => !server.privHive)}/>
+        <ServersTable key={uuidv1()} servers={this.state.filteredServers.filter(server => !server.privHive)} pageSize={200}/>
       </Tab.Pane>
     )
   }, {
     menuItem: 'COMMUNITY_SERVERS', render: () =>
       <Tab.Pane>
-        <ServersTable servers={this.state.filteredServers.filter(server => server.privHive)}/>
+        <ServersTable key={uuidv1()} servers={this.state.filteredServers.filter(server => server.privHive)} pageSize={200}/>
       </Tab.Pane>
   }]
 

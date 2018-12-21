@@ -1,5 +1,5 @@
 import React from 'react'
-import {Table} from 'semantic-ui-react'
+import {Table, Pagination} from 'semantic-ui-react'
 import {FormattedMessage} from 'react-intl'
 import {faSun, faMoon} from '@fortawesome/free-regular-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
@@ -21,58 +21,86 @@ const getDayTimeIcon = dayTime => {
 }
 
 class ServersTable extends React.Component {
+
+  state = {
+    activePage: 1
+  }
+
+  constructor(props) {
+    super(props)
+    console.log('server table component')
+  }
+
+
+  numberOfPages() {
+    return Math.ceil(this.props.servers.length / this.props.pageSize)
+  }
+
+  onPageChange(event, data) {
+    this.setState({activePage: data.activePage})
+  }
+
   render() {
     return (
-      <div className='server-browser-table-component'>
-        <Table celled>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>
-                <FormattedMessage id='SERVER_NAME'/>
-              </Table.HeaderCell>
-              <Table.HeaderCell>
-                <FormattedMessage id='CURRENT_PLAYERS'/>
-              </Table.HeaderCell>
-              <Table.HeaderCell>
-                <FormattedMessage id='MAX_PLAYERS'/>
-              </Table.HeaderCell>
-              <Table.HeaderCell>
-                <FormattedMessage id='DAY_TIME'/>
-              </Table.HeaderCell>
-              <Table.HeaderCell>
-                <FormattedMessage id='IP_ADDRESS'/>
-              </Table.HeaderCell>
-              <Table.HeaderCell>
-                <FormattedMessage id='VERSION'/>
-              </Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {this.props.servers.map(server => (
+      <div>
+        <div className='server-browser-table-component'>
+          <Table celled>
+            <Table.Header>
               <Table.Row>
-                <Table.Cell>
-                  {server.name}
-                </Table.Cell>
-                <Table.Cell>
-                  {server.currentPlayers}
-                </Table.Cell>
-                <Table.Cell>
-                  {server.maxPlayers}
-                </Table.Cell>
-                <Table.Cell>
-                  <FontAwesomeIcon icon={getDayTimeIcon(server.dayTime)}/>
-                  <span className='server-day-time'>{server.dayTime}</span>
-                </Table.Cell>
-                <Table.Cell>
-                  {server.ip}
-                </Table.Cell>
-                <Table.Cell>
-                  {server.version}
-                </Table.Cell>
+                <Table.HeaderCell>
+                  <FormattedMessage id='SERVER_NAME'/>
+                </Table.HeaderCell>
+                <Table.HeaderCell>
+                  <FormattedMessage id='CURRENT_PLAYERS'/>
+                </Table.HeaderCell>
+                <Table.HeaderCell>
+                  <FormattedMessage id='MAX_PLAYERS'/>
+                </Table.HeaderCell>
+                <Table.HeaderCell>
+                  <FormattedMessage id='DAY_TIME'/>
+                </Table.HeaderCell>
+                <Table.HeaderCell>
+                  <FormattedMessage id='IP_ADDRESS'/>
+                </Table.HeaderCell>
+                <Table.HeaderCell>
+                  <FormattedMessage id='VERSION'/>
+                </Table.HeaderCell>
               </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
+            </Table.Header>
+            <Table.Body>
+              {this.props.servers
+                .slice((this.state.activePage - 1) * this.props.pageSize, this.state.activePage * this.props.pageSize)
+                .map(server => (
+                  <Table.Row>
+                    <Table.Cell>
+                      {server.name}
+                    </Table.Cell>
+                    <Table.Cell>
+                      {server.currentPlayers}
+                    </Table.Cell>
+                    <Table.Cell>
+                      {server.maxPlayers}
+                    </Table.Cell>
+                    <Table.Cell>
+                      <FontAwesomeIcon icon={getDayTimeIcon(server.dayTime)}/>
+                      <span className='server-day-time'>{server.dayTime}</span>
+                    </Table.Cell>
+                    <Table.Cell>
+                      {server.ip}
+                    </Table.Cell>
+                    <Table.Cell>
+                      {server.version}
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+            </Table.Body>
+          </Table>
+        </div>
+        <div className='server-browser-table-paginator'>
+          <Pagination totalPages={this.numberOfPages()}
+                      activePage={this.state.activePage}
+                      onPageChange={this.onPageChange.bind(this)}/>
+        </div>
       </div>
     )
   }
