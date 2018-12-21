@@ -94,7 +94,7 @@ class ServersTable extends React.Component {
                 .slice((this.state.activePage - 1) * this.props.pageSize, this.state.activePage * this.props.pageSize)
                 .map(server => (
                   <Table.Row>
-                    <Table.Cell width={8}>
+                    <Table.Cell width={6}>
                       {server.name}
                       <span className='battleye-icon'>
                         {server.battleyeProtected ? <FontAwesomeIcon icon={faLock}/> :

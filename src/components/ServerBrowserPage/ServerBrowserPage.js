@@ -7,6 +7,7 @@ import ServerBrowser from './ServerBrowser'
 import ServerBrowserFilter from '../ServerBrowserFilter/ServerBrowserFilter'
 import ServersTable from '../ServersTable/ServersTable'
 import uuidv1 from 'uuid/v1'
+import {debounce} from '../../helper/helperfunctions'
 
 
 const mapServer = server => {
@@ -62,6 +63,10 @@ const filterByDayTime = (server, dayTimeFilter) => dayTimeFilter[0] === 'neutral
   dayTimeFilter[0] === 'positive' && isInDayTimeRange(server.dayTime, dayTimeFilter[1]) ||
   dayTimeFilter[0] === 'negative' && !isInDayTimeRange(server.dayTime, dayTimeFilter[1])
 
+const filterByBattleyeProtected = (server, battleyeProtectedFilter) => battleyeProtectedFilter === 'neutral' ||
+  battleyeProtectedFilter === 'positive' && server.battleyeProtected ||
+  battleyeProtectedFilter === 'negative' && !server.battleyeProtected
+
 const serverComparator = column => (a, b) => {
   switch (column) {
     case 'name':
@@ -92,7 +97,8 @@ class ServerBrowserPage extends React.Component {
       serverName: '',
       ip: '',
       fullServer: 'neutral',
-      dayTime: ['neutral', [600, 840]]
+      dayTime: ['neutral', [600, 840]],
+      battleyeProtected: 'neutral'
     },
     filteredServers: [],
     sorting: {
@@ -165,7 +171,8 @@ class ServerBrowserPage extends React.Component {
       filterByServerName(server, this.state.filter.serverName) &&
       filterByIp(server, this.state.filter.ip) &&
       filterByFullServer(server, this.state.filter.fullServer) &&
-      filterByDayTime(server, this.state.filter.dayTime)
+      filterByDayTime(server, this.state.filter.dayTime) &&
+      filterByBattleyeProtected(server, this.state.filter.battleyeProtected)
     ).sort((a, b) => (this.state.sorting.direction === 'ascending' ? 1 : -1) *
       serverComparator(this.state.sorting.column)(a, b))
     this.setState({filteredServers})
@@ -190,8 +197,15 @@ class ServerBrowserPage extends React.Component {
   }
 
   onDayTimeChange(includeDayTime, dayTime) {
+    console.log('day time change')
     const filter = {...this.state.filter}
     filter.dayTime = [includeDayTime, dayTime]
+    this.setState({filter}, this.filterServers)
+  }
+
+  onChangeBattleyeProtectedFilter(value) {
+    const filter = {...this.state.filter}
+    filter.battleyeProtected = value
     this.setState({filter}, this.filterServers)
   }
 
@@ -205,6 +219,7 @@ class ServerBrowserPage extends React.Component {
           <ServerBrowserFilter onChangeDayFilter={this.onChangeDayFilter.bind(this)}
                                onSearchByNameChange={this.onSearchByNameChange.bind(this)}
                                onIpChange={this.onIpChange.bind(this)}
+                               onChangeBattleyeProtectedFilter={this.onChangeBattleyeProtectedFilter.bind(this)}
                                onChangeFullServerFilter={this.onChangeFullServerFilter.bind(this)}
                                onDayTimeChange={this.onDayTimeChange.bind(this)}/>
         </div>

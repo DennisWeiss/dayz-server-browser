@@ -2,8 +2,10 @@ const debounce = (f, interval, immediate) => {
   let blocked = false
   let timeout
   return (...args) => {
+    console.log(...args, blocked, timeout)
     const context = this
     const callAfter = callFunction => () => {
+      // console.log('calling after', blocked, timeout, callFunction)
       if (callFunction) {
         f.apply(context, args)
       }
@@ -18,6 +20,7 @@ const debounce = (f, interval, immediate) => {
       }
       blocked = true
       timeout = setTimeout(callAfter(!immediate), interval)
+      console.log(blocked, immediate, timeout)
     }
   }
 }

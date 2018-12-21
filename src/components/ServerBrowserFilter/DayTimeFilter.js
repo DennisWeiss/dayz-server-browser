@@ -2,7 +2,7 @@ import React from 'react'
 import {Slider} from 'antd'
 import ThreeStateCheckbox from '../../common/ThreeStateCheckbox'
 import {FormattedMessage} from 'react-intl'
-import {ensureDigits} from '../../helper/helperfunctions'
+import {debounce, ensureDigits} from '../../helper/helperfunctions'
 
 
 const minuteToDayTimeFormat = minute => `${Math.floor(minute / 60)}:${ensureDigits(minute % 60, 2)}`
@@ -39,7 +39,7 @@ class DayTimeFilter extends React.Component {
   render() {
     return (
       <div className='day-time-slider'>
-        <ThreeStateCheckbox title={<FormattedMessage id='INCLUDE_TIME'/>}
+        <ThreeStateCheckbox title='Include time'
                             checked={this.state.includeTime}
                             onClick={this.onChangeIncludeTime.bind(this)}/>
         <Slider range
