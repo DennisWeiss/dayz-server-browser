@@ -19,7 +19,8 @@ const mapServer = server => {
     dayTime: gameTypeLst.length > 0 ? gameTypeLst[gameTypeLst.length - 1] : '',
     ip: server.addr,
     version: server.version,
-    privHive: gameTypeLst.includes('privHive')
+    privHive: gameTypeLst.includes('privHive'),
+    battleyeProtected: gameTypeLst.includes('battleye')
   }
 }
 
