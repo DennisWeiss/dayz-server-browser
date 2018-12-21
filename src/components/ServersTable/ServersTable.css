@@ -22,3 +22,7 @@
 .col-daytime {
     text-align: center !important;
 }
+
+.sortable-header-cell-title {
+    margin-right: 5px;
+}

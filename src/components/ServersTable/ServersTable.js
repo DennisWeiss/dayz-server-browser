@@ -2,6 +2,7 @@ import React from 'react'
 import {Table, Pagination} from 'semantic-ui-react'
 import {FormattedMessage} from 'react-intl'
 import {faSun, faMoon} from '@fortawesome/free-regular-svg-icons'
+import {faSortUp, faSortDown} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import './ServersTable.css'
 
@@ -40,6 +41,17 @@ class ServersTable extends React.Component {
     this.setState({activePage: data.activePage})
   }
 
+  getSortIcon(column) {
+    if (this.props.sorting.column === column) {
+      if (this.props.sorting.direction === 'ascending') {
+        return <FontAwesomeIcon icon={faSortUp}/>
+      } else if (this.props.sorting.direction === 'descending') {
+        return <FontAwesomeIcon icon={faSortDown}/>
+      }
+    }
+    return null
+  }
+
   render() {
     return (
       <div>
@@ -51,25 +63,29 @@ class ServersTable extends React.Component {
                   className='sortable-header-cell'
                   sorted={this.props.sorting.column === 'name' ? this.props.sorting.direction : null}
                   onClick={this.props.handleSort('name')}>
-                  Server name
+                  <span className='sortable-header-cell-title'>Server name</span>
+                  {this.getSortIcon('name')}
                 </Table.HeaderCell>
                 <Table.HeaderCell
                   className='sortable-header-cell'
                   sorted={this.props.sorting.column === 'currentPlayers' ? this.props.sorting.direction : null}
                   onClick={this.props.handleSort('currentPlayers')}>
-                  Players
+                  <span className='sortable-header-cell-title'>Players</span>
+                  {this.getSortIcon('currentPlayers')}
                 </Table.HeaderCell>
                 <Table.HeaderCell
                   className='sortable-header-cell'
                   sorted={this.props.sorting.column === 'maxPlayers' ? this.props.sorting.direction : null}
                   onClick={this.props.handleSort('maxPlayers')}>
-                  Max players
+                  <span className='sortable-header-cell-title'>Max players</span>
+                  {this.getSortIcon('maxPlayers')}
                 </Table.HeaderCell>
                 <Table.HeaderCell
                   className='sortable-header-cell'
                   sorted={this.props.sorting.column === 'dayTime' ? this.props.sorting.direction : null}
                   onClick={this.props.handleSort('dayTime')}>
-                  Day time
+                  <span className='sortable-header-cell-title'>Day time</span>
+                  {this.getSortIcon('dayTime')}
                 </Table.HeaderCell>
                 <Table.HeaderCell>
                   <FormattedMessage id='IP_ADDRESS'/>
