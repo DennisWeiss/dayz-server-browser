@@ -70,6 +70,10 @@ code {
     border: 0;
 }
 
+.ui.tabular.menu .active.item:hover {
+    background: rgba(0, 0, 0, 0.7) !important;
+}
+
 .ui.tabular.menu .item {
     color: #dddddd;
 }
