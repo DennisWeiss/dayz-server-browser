@@ -17,19 +17,22 @@ class ServerBrowserFilter extends React.Component {
         <FontAwesomeIcon size='lg' icon={faFilter}/>
         <span className='filter-heading'>Filter</span>
         <div className='filter-content'>
-          <Input placeholder='Search by name' onChange={debounce(this.props.onSearchByNameChange, 500, false)}/>
+          <Input placeholder='Search by name' value={this.props.name} onChange={this.props.onSearchByNameChange}/>
           <br/>
           <br/>
-          <Input placeholder='Search by IP' onChange={debounce(this.props.onIpChange, 500, false)}/>
+          <Input placeholder='Search by IP' value={this.props.ip} onChange={this.props.onIpChange}/>
           <br/>
           <br/>
-          <ThreeStateCheckbox title='Full server' onClick={this.props.onChangeFullServerFilter}/>
+          <ThreeStateCheckbox title='Full server' checked={this.props.fullServer} onClick={this.props.onChangeFullServerFilter}/>
           <br/>
-          <ThreeStateCheckbox title='Battleye protected' onClick={this.props.onChangeBattleyeProtectedFilter}/>
+          <ThreeStateCheckbox title='Battleye protected' checked={this.props.battleyeProtected}
+                              onClick={this.props.onChangeBattleyeProtectedFilter}/>
           <br/>
-          <ThreeStateCheckbox title='Day' onClick={this.props.onChangeDayFilter}/>
+          <ThreeStateCheckbox title='Day' checked={this.props.day} onClick={this.props.onChangeDayFilter}/>
           <br/>
-          <DayTimeFilter onDayTimeChange={debounce(this.props.onDayTimeChange, 100, false)} />
+          <DayTimeFilter includeTime={this.props.dayTime[0]}
+                         timeRange={this.props.dayTime[1]}
+                         onDayTimeChange={this.props.onDayTimeChange} />
           <br/>
 
         </div>
