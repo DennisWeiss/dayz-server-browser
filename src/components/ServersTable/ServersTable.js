@@ -1,11 +1,12 @@
 import React from 'react'
-import {Table, Pagination, Button} from 'semantic-ui-react'
+import {Table, Pagination, Button, Dimmer, Loader} from 'semantic-ui-react'
 import {FormattedMessage} from 'react-intl'
 import {faSun, faMoon} from '@fortawesome/free-regular-svg-icons'
 import {faSortUp, faSortDown, faLock, faLockOpen} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import './ServersTable.css'
 import classNames from 'classnames'
+import uuidv1 from 'uuid/v1'
 
 
 const getDayTimeIcon = dayTime => {
@@ -91,10 +92,13 @@ class ServersTable extends React.Component {
               </Table.Row>
             </Table.Header>
             <Table.Body>
+              <Dimmer active={this.props.loading}>
+                <Loader/>
+              </Dimmer>
               {this.props.servers
                 .slice((this.state.activePage - 1) * this.props.pageSize, this.state.activePage * this.props.pageSize)
                 .map(server => (
-                  <Table.Row>
+                  <Table.Row key={uuidv1()}>
                     <Table.Cell width={6}>
                       {server.name}
                       <span className='battleye-icon'>
