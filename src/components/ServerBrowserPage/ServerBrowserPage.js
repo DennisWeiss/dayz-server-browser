@@ -193,7 +193,7 @@ class ServerBrowserPage extends React.Component {
   }]
 
   onChangeDayFilter(day) {
-    this.reactUrlState.setUrlState({day}, this.filterServers)
+    this.setState({day}, this.filterServers)
   }
 
   filterServers() {
@@ -209,24 +209,26 @@ class ServerBrowserPage extends React.Component {
     this.setState({filteredServers})
   }
 
+  debouncedFilterServers = debounce(this.filterServers.bind(this), 300, false)
+
   onSearchByNameChange(event, data) {
-    this.reactUrlState.setUrlState({serverName: data.value}, debounce(this.filterServers.bind(this), 500, false))
+    this.setState({serverName: data.value}, this.debouncedFilterServers)
   }
 
   onIpChange(event, data) {
-    this.reactUrlState.setUrlState({ip: data.value}, debounce(this.filterServers.bind(this), 500, false))
+    this.setState({ip: data.value}, this.debouncedFilterServers)
   }
 
   onChangeFullServerFilter(fullServer) {
-    this.reactUrlState.setUrlState({fullServer}, this.filterServers)
+    this.setState({fullServer}, this.filterServers)
   }
 
   onDayTimeChange(includeDayTime, dayTime) {
-    this.reactUrlState.setUrlState({dayTime: [includeDayTime, dayTime]}, this.filterServers)
+    this.setState({dayTime: [includeDayTime, dayTime]}, this.debouncedFilterServers)
   }
 
   onChangeBattleyeProtectedFilter(battleyeProtected) {
-    this.reactUrlState.setUrlState({battleyeProtected}, this.filterServers)
+    this.setState({battleyeProtected}, this.filterServers)
   }
 
   render() {
@@ -237,17 +239,16 @@ class ServerBrowserPage extends React.Component {
         </div>
         <div>
           <ServerBrowserFilter onChangeDayFilter={this.onChangeDayFilter.bind(this)}
-                               day={this.state.day}
+                               // day={this.state.day}
                                onSearchByNameChange={this.onSearchByNameChange.bind(this)}
-                               name={this.state.serverName}
+                               // name={this.state.serverName}
                                onIpChange={this.onIpChange.bind(this)}
-                               ip={this.state.ip}
+                               // ip={this.state.ip}
                                onChangeBattleyeProtectedFilter={this.onChangeBattleyeProtectedFilter.bind(this)}
-                               battleyeProtected={this.state.battleyeProtected}
+                               // battleyeProtected={this.state.battleyeProtected}
                                onChangeFullServerFilter={this.onChangeFullServerFilter.bind(this)}
-                               fullServer={this.state.fullServer}
-                               onDayTimeChange={this.onDayTimeChange.bind(this)}
-                               dayTime={this.state.dayTime}/>
+                               // fullServer={this.state.fullServer}
+                               onDayTimeChange={this.onDayTimeChange.bind(this)} />
         </div>
       </div>
     )

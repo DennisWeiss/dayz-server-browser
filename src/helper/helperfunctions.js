@@ -19,7 +19,6 @@ const debounce = (f, interval, immediate) => {
       }
       blocked = true
       timeout = setTimeout(callAfter(!immediate), interval)
-      console.log(blocked, immediate, timeout)
     }
   }
 }
