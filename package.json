@@ -1,6 +1,7 @@
 {
   "name": "dayz-server-browser",
   "version": "0.1.0",
+  "homepage": "https://gr-esports.de/dayz-server-browser",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.10",

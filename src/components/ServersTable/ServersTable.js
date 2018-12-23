@@ -99,7 +99,7 @@ class ServersTable extends React.Component {
                 .slice((this.state.activePage - 1) * this.props.pageSize, this.state.activePage * this.props.pageSize)
                 .map(server => (
                   <Table.Row key={uuidv1()}>
-                    <Table.Cell width={6}>
+                    <Table.Cell width={7}>
                       {server.name}
                       <span className='battleye-icon'>
                         {server.battleyeProtected ? <FontAwesomeIcon icon={faLock}/> :
@@ -109,7 +109,7 @@ class ServersTable extends React.Component {
                     <Table.Cell width={1} className='col-number'>
                       {server.currentPlayers}
                     </Table.Cell>
-                    <Table.Cell width={2} className='col-number'>
+                    <Table.Cell width={1} className='col-number'>
                       {server.maxPlayers}
                     </Table.Cell>
                     <Table.Cell width={2} className='col-daytime'>
