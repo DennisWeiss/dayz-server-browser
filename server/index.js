@@ -3,10 +3,14 @@ const axios = require('axios')
 const appConf = require('./conf/config')
 const fs = require('fs')
 const https = require('https')
+const cors = require('cors')
 
 
 const app = express()
 const port = 3001
+
+app.use(cors())
+app.options('*', cors())
 
 app.get('/', (req, res) => {
   axios
